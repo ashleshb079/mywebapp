@@ -4,24 +4,25 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/ashleshb079/mywebapp.git'
+                // Clone your GitHub repo
+                git branch: 'main', url: 'https://github.com/yourusername/mywebapp.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("mywebapp:latest")
-                }
+                // Build Docker image from Dockerfile
+                sh 'docker build -t mywebapp:latest .'
             }
         }
 
-        stage('Run Container') {
+        stage('Run Docker Container') {
             steps {
-                script {
-                    sh "docker rm -f mywebapp || true"
-                    docker.run("mywebapp:latest", "-d -p 80:80 --name mywebapp")
-                }
+                // Remove old container if exists
+                sh 'docker rm -f mywebapp || true'
+                
+                // Run new container, mapping host port 80
+                sh 'docker run -d -p 80:80 --name mywebapp mywebapp:latest'
             }
         }
     }
