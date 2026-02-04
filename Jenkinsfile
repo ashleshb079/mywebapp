@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 // Clone your GitHub repo
-                git branch: 'main', url: 'https://github.com/yourusername/mywebapp.git'
+                git branch: 'main', url: 'https://github.com/ashleshb079/mywebapp.git'
             }
         }
 
